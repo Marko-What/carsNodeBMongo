@@ -1,0 +1,5 @@
+{"_id":{"$oid":"5d10d75b1e851958c875d4d8"},"ime":"qwerty","priimek":"uuuu","naslov":"ss 2222","starost":32,"avto":"bmw"}
+{"_id":{"$oid":"5d12437b7779b062c98e02f1"},"ime":"Marinas","priimek":"Poljsak","naslov":"ssas","starost":31,"avto":"bmw","__v":0}
+{"_id":{"$oid":"5d1247137779b062c98e02f3"},"ime":"Marko","priimek":"Testing","naslov":"Ukamrjeva2","starost":25,"avto":"bmw","__v":0}
+{"_id":{"$oid":"5d1259a47779b062c98e02f5"},"ime":"Jack ","priimek":"Daniels","naslov":"america road 23","starost":26,"avto":"bmw","__v":0}
+{"_id":{"$oid":"5d126dfbeecb6e6e15a35f5e"},"ime":"Peter","priimek":"Umer","naslov":"Tuscan12","starost":33,"avto":"audi","__v":0}
