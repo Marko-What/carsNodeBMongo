@@ -23,23 +23,13 @@ router.use(function(req, res, next) {
 
 
 
-
-
-
-
-
-
-
-
 router.get('/', function (req, res) {
-
-	  carusers.getcarusers()
+       carusers.getcarusers()
         .then(function(rows) {
-            console.log(rows);
              res.json(rows);
         })
         .catch(function(error) {
-            // Handle error here
+             res.json('something went wrong');
         })
 	
 
@@ -48,14 +38,12 @@ router.get('/', function (req, res) {
 
 
 router.get('/single', function (req, res) {
- 
-		carusers.getsinglecaruser(req.query._id)
+     carusers.getsinglecaruser(req.query._id)
         .then(function(rows) {
-            console.log(rows);
              res.json(rows);
         })
         .catch(function(error) {
-            // Handle error here
+             res.json('something went wrong');
         })
 
 
@@ -64,44 +52,49 @@ router.get('/single', function (req, res) {
 
 
 router.post('/', function (req, res) {
-
-
-	 carusers.createcaruser(req.raw_body)
-        .then(function() {
-          res.json('NEW USER ADDED');
+	
+	carusers.createcaruser(req.raw_body)
+       .then(function(data) {
+						res.send(data);
+        
         })
         .catch(function(error) {
             res.status(400).json(error);
         })
+		
+
+});
+
+
+
+router.put('/update', function(req, res) {
+    carusers.updatecaruser(req.raw_body).then(function(data) {
+					res.send(data);
+        })
+        .catch(function(error) {
+            res.status(400).json(error);
+        })
+});
+
+
+
+
+
+
+router.delete('/delete', function (req, res) {
+    carusers.deletecaruser(req.raw_body).then(function(data) {
+					res.send(data);
+        })
+        .catch(function(error) {
+            res.status(400).json(error);
+        });
+
+
 
 
 });
 
 
-router.post('/update', function (req, res) {
-    carusers.updatecaruser(req.raw_body, function (err, data) {
-        if (err) {
-            res.status(400).json(err);
-        }
-        else {
-           // res.json(data);
-        }
-				res.data("later on	");
-    });
-});
-
-
-
-router.post('/delete', function (req, res) {
-    carusers.deletecaruser(req.raw_body, function (err, data) {
-        if (err) {
-            res.status(400).json(err);
-        }
-        else {
-            res.json({});
-        }
-    });
-});
 
 module.exports = router;
 

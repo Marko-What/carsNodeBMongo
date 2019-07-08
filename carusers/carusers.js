@@ -37,14 +37,13 @@ var carusers = {
 	return new Promise(function(resolve, reject) {
        
 		modelTest.find({},function(err, rows){
-		console.log(rows);
-		  if (err) 
-                reject(err)
-		    else 
-		        resolve(rows);
-		})
-	});
-	
+			//console.log(rows);
+			if (err) 
+					reject(err)
+				else 
+					resolve(rows);
+			})
+		});
     },
 
 
@@ -56,21 +55,19 @@ var carusers = {
 	return new Promise(function(resolve, reject) {
        
 		modelTest.find({"_id":carUser._id},function(err, rows){
-		console.log(rows);
-		  if (err) 
-                reject(err)
-		    else 
-		        resolve(rows);
-		})
-	});
-
+			//console.log(rows);
+			if (err) 
+						reject(err)
+				else 
+				resolve(rows);
+			})
+		});
     },
 
 
 
     createcaruser: function (carUser) {
-		
-
+	
 	let carUsera = JSON.parse(carUser);
 
 	let data = {
@@ -82,18 +79,22 @@ var carusers = {
 	    avto: carUsera.avto
 	};
 
-
+	
 
 	var newCarUser = new modelTest(data);
-	 
-	newCarUser.save(function(err) {
-	    if (err) throw err;
-	    console.log('newCarUser successfully saved.');
-	});
 
+	return new Promise(function(resolve, reject) {
 
+		newCarUser.save(function(err) {
+			if (err){
+				reject({'data':'something went wrong'});
+			} 
+				resolve({'data':'saved'});
+			});
+		
+
+		});
     },
-
 
 
 
@@ -105,13 +106,9 @@ var carusers = {
    updatecaruser: function (carUser) {
 		let obja = JSON.parse(carUser);
 			
+	return new Promise(function(resolve, reject) {
 
-	modelTest.findByIdAndUpdate(
-	    // the id of the item to find
-	    obja._id,
-	    
-	    // the change to be made. Mongoose will smartly combine your existing 
-	    // document with this change, which allows for partial updates too
+	modelTest.findByIdAndUpdate(obja._id,
 	    {
 		"ime" : obja.ime,
 		"priimek" : obja.priimek,
@@ -126,14 +123,17 @@ var carusers = {
 	    
 	    // the callback function
 	    (err, user) => {
-	    // Handle any possible database errors
-		if (err) return res.status(500).send(err);
-		console.log(user);
-		return "yes";
-		//return res.send("yes");
+		if (err) {
+			console.log(err);			
+			reject({"data":"user was not updated"});
+		}
+		 	resolve({"data":"user was updated"}); 
+		
 	    }
-	)
+	
 
+	)
+ 	}); /* end of return promise*/
 		
 		
     },
@@ -142,16 +142,33 @@ var carusers = {
 
 
    deletecaruser: function (carUserData, callback) {
-					let obja = JSON.parse(carUserData);
+			let obja = JSON.parse(carUserData);
+
+		return new Promise(function(resolve, reject) {
 
 		modelTest.findByIdAndRemove(obja._id, (err, tasks) => {
 		    //if (err) return res.status(500).send(err);
-		    const response = {
-		        message: "Car User successfully deleted"
-		    };
+		    if (err){
+				console.log('user was not deleted '+ err);
+				reject({"data":"user was not deleted"});
+			} 
+	    		console.log({'data':'user was successfully deleted'});
+			    resolve({'data':'user was successfully deleted'});
+		});
 			
 		});
+
+
     }
+
+
+
+
+
+
+
+
+
 
  }
 

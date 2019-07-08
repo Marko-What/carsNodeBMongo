@@ -17,5 +17,6 @@
     "mongoose": "^5.6.1",
     "mysql": "^2.14.1",
     "officegen": "^0.4.5"
-  }
+  },
+  "devDependencies": {}
 }
