@@ -14,7 +14,7 @@
     "cors": "^2.8.4",
     "express": "^4.15.4",
     "express-list-endpoints": "^3.0.1",
-    "mongoose": "^5.6.1",
+    "mongoose": "^5.13.15",
     "mysql": "^2.14.1",
     "officegen": "^0.4.5"
   },
